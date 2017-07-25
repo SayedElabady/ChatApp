@@ -1,25 +1,25 @@
-package abady.chatapp.useraccess;
+package abady.chatapp.register;
 
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import abady.chatapp.R;
+import abady.chatapp.login.LoginContract;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RegisterActivity extends AppCompatActivity implements AccessContract.Register {
+public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
 
     @BindView(R.id.email_register_text) EditText emailRegisterText;
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
     @BindView(R.id.activity_register) LinearLayout linearLayout;
 
-    AccessContract.Presenter mPresenter;
+    RegisterContract.Presenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,9 @@ public class RegisterActivity extends AppCompatActivity implements AccessContrac
     }
 
     @Override
-    public void setPresenter(AccessContract.Presenter presenter) {
+    public void setPresenter(RegisterContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
+
 }

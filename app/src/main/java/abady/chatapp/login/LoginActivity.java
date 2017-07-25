@@ -1,6 +1,5 @@
-package abady.chatapp.useraccess;
+package abady.chatapp.login;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,17 +13,18 @@ import android.widget.RelativeLayout;
 
 import abady.chatapp.R;
 import abady.chatapp.chat.ChatActivity;
+import abady.chatapp.register.RegisterActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends AppCompatActivity implements AccessContract.Login{
+public class LoginActivity extends AppCompatActivity implements LoginContract.Login{
 
     @BindView(R.id.email_text) EditText usernameText;
     @BindView(R.id.password_text) EditText passwordText;
     @BindView(R.id.login_button) Button loginButton;
     @BindView(R.id.activity_login) RelativeLayout relativeLayout;
 
-    AccessContract.Presenter AccessPresenter;
+    LoginContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +41,34 @@ public class LoginActivity extends AppCompatActivity implements AccessContract.L
     }
 
     public void login(View view) {
-        loginButton.setEnabled(false);
+        mPresenter.DisableButton(loginButton);
 
-        ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
+        mPresenter.ShowProgress(LoginActivity.this);
 
+        mPresenter.onSignin(usernameText.getText().toString() , passwordText.getText().toString());
 
+        if(mPresenter.isLoginSuccessful()){
+            mPresenter.ShowSuccessfulMessage(relativeLayout);
+
+            mPresenter.MoveToChatActivity(LoginActivity.this);
+        }else {
+            mPresenter.ShowFailureMessage();
+            mPresenter.EnableButton(loginButton);
+        }
     }
 
     @Override
     public void onLoginSuccess() {
-        Snackbar snackbar = Snackbar
-                .make(relativeLayout, "Successfully Signin!", Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        Intent intent = new Intent(LoginActivity.this , ChatActivity.class);
-        startActivity(intent);
+
     }
 
     @Override
     public void onLoginFailure() {
-        Snackbar snackbar = Snackbar
-                .make(relativeLayout, "Invaild Password or email!", Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        loginButton.setEnabled(true);
+        
     }
 
     @Override
-    public void setPresenter(@NonNull AccessContract.Presenter presenter) {
-        AccessPresenter =  presenter;
+    public void setPresenter(@NonNull LoginContract.Presenter presenter) {
+        mPresenter =  presenter;
     }
 }
