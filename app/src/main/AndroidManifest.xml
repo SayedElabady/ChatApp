@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".useraccess.RegisterActivity"></activity>
+        <activity android:name=".useraccess.RegisterActivity" />
+        <activity android:name=".chat.ChatActivity"></activity>
     </application>
 
 </manifest>
