@@ -36,8 +36,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
 
     public void onRegister(View view) {
-        Intent intent = new Intent(LoginActivity.this , RegisterActivity.class);
-        startActivity(intent);
+        mPresenter.MoveToRegisterActivity(LoginActivity.this);
     }
 
     public void login(View view) {
@@ -57,15 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         }
     }
 
-    @Override
-    public void onLoginSuccess() {
 
-    }
-
-    @Override
-    public void onLoginFailure() {
-        
-    }
 
     @Override
     public void setPresenter(@NonNull LoginContract.Presenter presenter) {

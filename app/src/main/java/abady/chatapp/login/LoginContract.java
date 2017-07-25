@@ -16,11 +16,12 @@ public interface LoginContract {
 
      interface Login extends BaseView<Presenter> {
 
-          void onLoginSuccess();
-
-          void onLoginFailure();
 
 
+
+    }
+    interface Model  {
+        boolean isLoginSuccessful(String email , String Password);
     }
 
     interface Presenter{

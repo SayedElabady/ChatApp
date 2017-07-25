@@ -15,6 +15,9 @@ public interface RegisterContract {
         void onRegisterFailure();
 
     }
+    interface Model  {
+        boolean isRegisteredSuccessful(String email , String Password);
+    }
     interface Presenter{
 
 
