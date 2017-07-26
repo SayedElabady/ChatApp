@@ -40,7 +40,7 @@ public class LoginPresenter extends BaseActivity implements LoginContract.Presen
                     Throwable exception = throwable;
                     String message = exception.getMessage();
 
-                    mView
+                    mView.showFailureMessage();
                 });
     }
 

@@ -24,7 +24,8 @@ public class RegisterPresenter extends BaseActivity implements RegisterContract.
                             Throwable exception = throwable;
                             String message = exception.getMessage();
 
-                            mView
+                            mView.showFailureMessage();
+
                         });
 
     }

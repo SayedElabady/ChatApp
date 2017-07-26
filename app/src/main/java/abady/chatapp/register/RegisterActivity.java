@@ -32,16 +32,17 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         mPresenter = new RegisterPresenter();
     }
     boolean Validate(){
-        return (passwordRegisterText.toString() == repeatedPasswordText.toString());
+        return (passwordRegisterText.getText().toString().equals( repeatedPasswordText.getText().toString()));
     }
 
     public void Register(View view) {
-        if(!Validate()){
-            Snackbar snackbar = Snackbar
-                    .make(linearLayout, "Successfully Signin!", Snackbar.LENGTH_SHORT);
-            snackbar.show();
+        if(Validate()== true){
+            mPresenter.registerIsClicked(emailRegisterText.getText().toString() , passwordRegisterText.getText().toString());
+
         } else {
-            mPresenter.registerIsClicked(emailRegisterText.toString() , passwordRegisterText.toString());
+            Snackbar snackbar = Snackbar
+                    .make(linearLayout, "Password is not identical!", Snackbar.LENGTH_SHORT);
+            snackbar.show();
 
         }
     }

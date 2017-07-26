@@ -21,7 +21,6 @@ import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Maybe;
 import io.reactivex.annotations.NonNull;
 
-import static com.google.android.gms.internal.zzt.TAG;
 
 /**
  * Created by Sayed on 7/26/2017.

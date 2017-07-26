@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState, persistentState);
         instance = Firebase.getInstance();
     }
-  public  Maybe<AuthResult> signIn(String email , String password){
+    public  Maybe<AuthResult> signIn(String email , String password){
         return instance.signIn(email , password);
     }
     public Maybe<AuthResult> createUser(String email , String password){
