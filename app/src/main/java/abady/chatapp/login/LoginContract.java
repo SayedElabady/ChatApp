@@ -16,34 +16,23 @@ public interface LoginContract {
 
      interface Login extends BaseView<Presenter> {
 
+         void showProgress();
 
+         void moveToChatActivity();
 
+         void showSuccessfulMessage();
 
-    }
-    interface Model  {
-        boolean isLoginSuccessful(String email , String Password);
-    }
+         void showFailureMessage();
+
+     }
+
 
     interface Presenter{
 
         void onSignin(String Email, String Password);
 
-        void EnableButton(Button button);
-
-        void DisableButton(Button button);
 
 
-        boolean isLoginSuccessful();
-
-        void ShowFailureMessage();
-
-        void MoveToChatActivity(Context context);
-
-        void MoveToRegisterActivity(Context context);
-
-        void ShowProgress(Context context);
-
-        void ShowSuccessfulMessage(RelativeLayout layout);
 
 
 

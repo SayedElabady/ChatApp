@@ -24,52 +24,14 @@ public class LoginPresenter extends AppCompatActivity implements LoginContract.P
 
     }
 
-    @Override
-    public void EnableButton(Button button) {
-        button.setEnabled(true);
-    }
-
-    @Override
-    public void DisableButton(Button button) {
-        button.setEnabled(false);
-    }
 
 
-    @Override
-    public boolean isLoginSuccessful() {
-        return false;
-    }
 
-    @Override
-    public void ShowFailureMessage() {
 
-    }
 
-    @Override
-    public void MoveToChatActivity(Context context) {
-        Intent intent = new Intent(context , ChatActivity.class);
-        startActivity(intent);
+   }
 
-    }
 
-    @Override
-    public void MoveToRegisterActivity(Context context) {
-        Intent intent = new Intent(context , RegisterActivity.class);
-        startActivity(intent);
-    }
 
-    @Override
-    public void ShowProgress(Context context) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
-    }
 
-    @Override
-    public void ShowSuccessfulMessage(RelativeLayout layout) {
-        Snackbar snackbar = Snackbar
-                .make(layout, "Successfully Signin!", Snackbar.LENGTH_SHORT);
-        snackbar.show();
-    }
-}
+
