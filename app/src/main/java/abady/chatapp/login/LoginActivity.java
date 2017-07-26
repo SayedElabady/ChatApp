@@ -12,13 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import abady.chatapp.BaseActivity;
 import abady.chatapp.R;
 import abady.chatapp.chat.ChatActivity;
 import abady.chatapp.register.RegisterActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.Login{
+public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @BindView(R.id.email_text) EditText usernameText;
     @BindView(R.id.password_text) EditText passwordText;
@@ -41,11 +42,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
+
     }
 
     public void login(View view) {
 
-        mPresenter.onSignin(usernameText.getText().toString() , passwordText.getText().toString());
+        mPresenter.signInIsClicked(usernameText.getText().toString() , passwordText.getText().toString());
 
 
     }

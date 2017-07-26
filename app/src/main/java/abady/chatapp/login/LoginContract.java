@@ -14,7 +14,7 @@ import abady.chatapp.BaseView;
 
 public interface LoginContract {
 
-     interface Login extends BaseView<Presenter> {
+     interface View extends BaseView<Presenter> {
 
          void showProgress();
 
@@ -29,11 +29,7 @@ public interface LoginContract {
 
     interface Presenter{
 
-        void onSignin(String Email, String Password);
-
-
-
-
+        void signInIsClicked(String Email, String Password);
 
 
 

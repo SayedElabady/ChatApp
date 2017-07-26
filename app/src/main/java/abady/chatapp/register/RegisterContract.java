@@ -10,9 +10,13 @@ public interface RegisterContract {
 
     interface View extends BaseView<Presenter> {
 
-        void onRegisterSuccess();
+        void showProgress();
 
-        void onRegisterFailure();
+        void moveToChatActivity();
+
+        void showSuccessfulMessage();
+
+        void showFailureMessage();
 
     }
     interface Model  {
@@ -21,7 +25,7 @@ public interface RegisterContract {
     interface Presenter{
 
 
-        void onSignup(String Email, String Password);
+        void registerIsClicked(String Email, String Password);
 
     }
 }
