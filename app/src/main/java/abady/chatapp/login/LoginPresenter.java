@@ -24,7 +24,9 @@ import abady.chatapp.register.RegisterActivity;
 public class LoginPresenter extends BaseActivity implements LoginContract.Presenter {
         LoginContract.View mView;
 
-        public LoginPresenter(){
+
+
+    public LoginPresenter(){
             mView = new LoginActivity();
         }
 

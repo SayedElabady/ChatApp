@@ -16,12 +16,10 @@ public interface RegisterContract {
 
         void showSuccessfulMessage();
 
-        void showFailureMessage();
+        void showFailureMessage(String message);
 
     }
-    interface Model  {
-        boolean isRegisteredSuccessful(String email , String Password);
-    }
+
     interface Presenter{
 
 

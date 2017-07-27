@@ -2,32 +2,40 @@ package abady.chatapp.register;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import abady.chatapp.BaseActivity;
 import abady.chatapp.R;
 import abady.chatapp.chat.ChatActivity;
 import abady.chatapp.login.LoginActivity;
 import abady.chatapp.login.LoginContract;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
     @BindView(R.id.email_register_text) EditText emailRegisterText;
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
-    @BindView(R.id.activity_register) LinearLayout linearLayout;
-
+   // @BindView(R.id.activity_register) RelativeLayout relativeLayout;
+   RelativeLayout relativeLayout;
     RegisterContract.Presenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        relativeLayout = (RelativeLayout) findViewById(R.id.activity_register);
         ButterKnife.bind(this);
         mPresenter = new RegisterPresenter();
     }
@@ -36,12 +44,15 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     }
 
     public void Register(View view) {
-        if(Validate()== true){
-            mPresenter.registerIsClicked(emailRegisterText.getText().toString() , passwordRegisterText.getText().toString());
+        if(Validate() == true){
+            String Email = emailRegisterText.getText().toString();
+            String Password = passwordRegisterText.getText().toString();
+            mPresenter.registerIsClicked(Email , Password);
 
+           // createUser(Email , Password);
         } else {
             Snackbar snackbar = Snackbar
-                    .make(linearLayout, "Password is not identical!", Snackbar.LENGTH_SHORT);
+                    .make(relativeLayout, "Password is not identical!", Snackbar.LENGTH_SHORT);
             snackbar.show();
 
         }
@@ -71,15 +82,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public void showSuccessfulMessage() {
-        Snackbar snackbar = Snackbar
-                .make(linearLayout, "Successfully Registered!", Snackbar.LENGTH_SHORT);
-        snackbar.show();
+
+      //  Snackbar snackbar = Snackbar
+        //        .make(relativeLayout, "Successfully Registered!", Snackbar.LENGTH_SHORT);
+        //snackbar.show();
     }
 
     @Override
-    public void showFailureMessage() {
-        Snackbar snackbar = Snackbar
-                .make(linearLayout, "Failed to Regsiter", Snackbar.LENGTH_SHORT);
-        snackbar.show();
+    public void showFailureMessage(String message) {
+        Toast.makeText(RegisterActivity.this, "Failed Registration: "+message, Toast.LENGTH_SHORT).show();
+
+        //Snackbar snackbar = Snackbar
+          //      .make(relativeLayout, "Failed to Regsiter", Snackbar.LENGTH_SHORT);
+        //snackbar.show();
     }
 }
