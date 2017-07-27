@@ -31,7 +31,9 @@ public interface LoginContract {
 
         void signInIsClicked(String Email, String Password);
 
+        void setView(View view);
 
+        void isUserLoggedIn();
 
     }
 }

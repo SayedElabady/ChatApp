@@ -7,8 +7,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.AuthResult;
 
-import abady.chatapp.data.AuthFirebase;
-import abady.chatapp.data.Firebaseauth;
+import abady.chatapp.data.Firebase;
 import io.reactivex.Maybe;
 
 /**
@@ -16,20 +15,40 @@ import io.reactivex.Maybe;
  */
 
 public class BaseActivity extends AppCompatActivity{
-   private static AuthFirebase instance;
+   private static Firebase instance;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        instance = AuthFirebase.getInstance();
+        instance = Firebase.getInstance();
 
     }
+
+
     public  Maybe<AuthResult> signIn(String email , String password){
         return instance.signIn(email , password);
     }
+
+
     public Maybe<AuthResult> createUser(String email , String password){
         return instance.createUser(email , password);
     }
+
+
     void showToast(String message) {
         runOnUiThread(() -> Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show());
+    }
+
+
+    public boolean isUserLogged(){
+        return instance.isUserLogged();
+    }
+
+
+    public void signOut(){
+        instance.signOut();
+    }
+
+    public void sendMessage(String Message){
+        instance.sendMessage(Message);
     }
 }

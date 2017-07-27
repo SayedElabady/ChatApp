@@ -27,8 +27,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     @BindView(R.id.email_text) EditText usernameText;
     @BindView(R.id.password_text) EditText passwordText;
     @BindView(R.id.login_button) Button loginButton;
-    @BindView(R.id.activity_login)
-    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.activity_login) CoordinatorLayout coordinatorLayout;
 
     LoginContract.Presenter mPresenter;
 
@@ -39,6 +38,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
         mPresenter = new LoginPresenter();
+        mPresenter.setView(this);
+        mPresenter.isUserLoggedIn();
 
     }
 
@@ -53,7 +54,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void login(View view) {
 
         mPresenter.signInIsClicked(usernameText.getText().toString() , passwordText.getText().toString());
-
 
     }
 

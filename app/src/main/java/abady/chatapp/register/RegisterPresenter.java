@@ -14,36 +14,28 @@ import abady.chatapp.login.LoginActivity;
 public class RegisterPresenter extends BaseActivity implements RegisterContract.Presenter{
     RegisterContract.View mView ;
 
-
-
-    public RegisterPresenter(){
-        mView = new RegisterActivity();
-    }
-
     @Override
     public void registerIsClicked(String Email, String Password) {
+        mView.showProgress();
         createUser(Email , Password)
-                .doOnSuccess(
-                        authResult ->  mView.showSuccessfulMessage()
-                )
-                .doOnComplete(
-                        () ->   mView.moveToChatActivity()
-                ).doOnError(
-                        authResult -> mView.showFailureMessage("Hello")
-                 )
+
                 .subscribe(authResult -> {
-                         //   mView.showSuccessfulMessage();
-                            mView.moveToChatActivity();
+                           mView.showSuccessfulMessage();
+                            mView.moveToLoginActivity();
                         }
                         , throwable -> {
                             Throwable exception = throwable;
                             String message = exception.getMessage();
-
 
                             mView.showFailureMessage(message);
 
                         })
         ;
 
+    }
+
+    @Override
+    public void setView(RegisterContract.View view) {
+        mView = view;
     }
 }

@@ -28,16 +28,16 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @BindView(R.id.email_register_text) EditText emailRegisterText;
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
-   // @BindView(R.id.activity_register) RelativeLayout relativeLayout;
-   RelativeLayout relativeLayout;
+    @BindView(R.id.activity_register) RelativeLayout relativeLayout;
+
     RegisterContract.Presenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        relativeLayout = (RelativeLayout) findViewById(R.id.activity_register);
         ButterKnife.bind(this);
         mPresenter = new RegisterPresenter();
+        mPresenter.setView(this);
     }
     boolean Validate(){
         return (passwordRegisterText.getText().toString().equals( repeatedPasswordText.getText().toString()));
@@ -70,22 +70,22 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     public void showProgress() {
         ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("Registering...");
         progressDialog.show();
     }
 
     @Override
-    public void moveToChatActivity() {
-        Intent intent = new Intent(RegisterActivity.this, ChatActivity.class);
+    public void moveToLoginActivity() {
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void showSuccessfulMessage() {
 
-      //  Snackbar snackbar = Snackbar
-        //        .make(relativeLayout, "Successfully Registered!", Snackbar.LENGTH_SHORT);
-        //snackbar.show();
+        Snackbar snackbar = Snackbar
+                .make(relativeLayout, "Successfully Registered!", Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
     @Override

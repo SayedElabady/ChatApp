@@ -26,13 +26,12 @@ public class LoginPresenter extends BaseActivity implements LoginContract.Presen
 
 
 
-    public LoginPresenter(){
-            mView = new LoginActivity();
-        }
+
 
 
     @Override
     public void signInIsClicked(String Email, String Password) {
+        mView.showProgress();
         signIn(Email , Password)
                 .subscribe(authResult -> {
                         mView.showSuccessfulMessage();
@@ -46,12 +45,21 @@ public class LoginPresenter extends BaseActivity implements LoginContract.Presen
                 });
     }
 
+    @Override
+    public void setView(LoginContract.View view) {
+        mView = view;
+    }
+
+    @Override
+    public void isUserLoggedIn() {
+
+        if(isUserLogged()){
+            mView.moveToChatActivity();
+        }
+    }
 
 
-
-
-
-   }
+}
 
 
 

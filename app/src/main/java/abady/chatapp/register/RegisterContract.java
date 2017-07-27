@@ -12,7 +12,7 @@ public interface RegisterContract {
 
         void showProgress();
 
-        void moveToChatActivity();
+        void moveToLoginActivity();
 
         void showSuccessfulMessage();
 
@@ -25,5 +25,6 @@ public interface RegisterContract {
 
         void registerIsClicked(String Email, String Password);
 
+        void setView(View view);
     }
 }
