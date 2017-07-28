@@ -16,11 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_name_register_text"
-            android:hint="User Name"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

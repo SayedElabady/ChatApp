@@ -55,7 +55,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     protected void onResume() {
         super.onResume();
-        updateUI();
+
        // addListener();
     }
 
@@ -104,14 +104,12 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
                     if(!userEmail.equals(name)){
                         view = mActivity.getLayoutInflater().inflate(R.layout.message_by_him, viewGroup, false);
                     }else {
-                        model.setMessageSender("Me");
                         view = mActivity.getLayoutInflater().inflate(mLayout, viewGroup, false);
                     }
                 }
 
 
 
-                // Call out to subclass to marshall this model into the provided view
                 populateView(view, model, position);
                 return view;
             }
@@ -124,7 +122,9 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
                 messageSender = (TextView) v.findViewById(R.id.user_name);
                 messageText = (TextView) v.findViewById(R.id.message_text);
-
+                if(name == mPresenter.getUserEmail())
+                    messageSender.setText("Me");
+                else
                 messageSender.setText(name);
                 messageText.setText(Message);
             }

@@ -15,7 +15,7 @@ public class RegisterPresenter extends BaseActivity implements RegisterContract.
     RegisterContract.View mView ;
 
     @Override
-    public void registerIsClicked(String Email, String Password , String UserName) {
+    public void registerIsClicked(String Email, String Password ) {
         mView.showProgress();
 
         createUser(Email , Password)

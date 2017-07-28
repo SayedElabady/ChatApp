@@ -23,7 +23,7 @@ public interface RegisterContract {
     interface Presenter{
 
 
-        void registerIsClicked(String Email, String Password , String UserName);
+        void registerIsClicked(String Email, String Password );
 
         void updateUserName(String UserName);
 
