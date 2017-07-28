@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import abady.chatapp.data.Firebase;
 import io.reactivex.Maybe;
@@ -51,4 +53,17 @@ public class BaseActivity extends AppCompatActivity{
     public void sendMessage(String Message){
         instance.sendMessage(Message);
     }
+
+    public FirebaseDatabase getDatabase(){
+        return instance.getDatabase();
+    }
+
+    public void updateUserInfo(String UserName){
+        instance.updateUserInfo( UserName);
+    }
+
+    public FirebaseUser getUser(){
+        return instance.getUser();
+    }
+
 }

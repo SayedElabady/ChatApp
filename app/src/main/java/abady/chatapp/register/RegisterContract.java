@@ -23,7 +23,9 @@ public interface RegisterContract {
     interface Presenter{
 
 
-        void registerIsClicked(String Email, String Password);
+        void registerIsClicked(String Email, String Password , String UserName);
+
+        void updateUserName(String UserName);
 
         void setView(View view);
     }

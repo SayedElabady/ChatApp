@@ -25,6 +25,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
+    @BindView(R.id.user_name_register_text) EditText userName;
     @BindView(R.id.email_register_text) EditText emailRegisterText;
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
@@ -39,6 +40,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         mPresenter = new RegisterPresenter();
         mPresenter.setView(this);
     }
+
+
+
     boolean Validate(){
         return (passwordRegisterText.getText().toString().equals( repeatedPasswordText.getText().toString()));
     }
@@ -47,9 +51,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         if(Validate() == true){
             String Email = emailRegisterText.getText().toString();
             String Password = passwordRegisterText.getText().toString();
-            mPresenter.registerIsClicked(Email , Password);
+            String UserName = userName.getText().toString();
+            mPresenter.registerIsClicked(Email , Password , UserName);
+         //   mPresenter.updateUserName(UserName);
 
-           // createUser(Email , Password);
         } else {
             Snackbar snackbar = Snackbar
                     .make(relativeLayout, "Password is not identical!", Snackbar.LENGTH_SHORT);

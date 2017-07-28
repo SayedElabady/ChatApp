@@ -14,16 +14,23 @@ public class ChatPresenter extends BaseActivity implements ChatContract.Presente
     @Override
     public void sendIsClicked(String Message) {
         sendMessage(Message);
+
         mView.updateUI();
     }
 
     @Override
-    public void signOut() {
+    public void signOutAcc() {
         signOut();
+        mView.moveToLogInActivity();
     }
 
     @Override
     public void setView(ChatContract.View view) {
         mView = view;
+    }
+
+    @Override
+    public String getUserEmail() {
+        return getUser().getEmail();
     }
 }

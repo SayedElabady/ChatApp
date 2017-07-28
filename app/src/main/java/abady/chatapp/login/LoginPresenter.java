@@ -53,9 +53,10 @@ public class LoginPresenter extends BaseActivity implements LoginContract.Presen
     @Override
     public void isUserLoggedIn() {
 
-        if(isUserLogged()){
+        if(isUserLogged() == true){
             mView.moveToChatActivity();
         }
+
     }
 
 

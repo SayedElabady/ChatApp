@@ -54,8 +54,6 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     compile "com.github.miguelbcr:RxPaparazzo:0.5.3-2.x"
     // Chat libraries
-    compile 'com.github.hani-momanii:SuperNova-Emoji:1.1'
-    compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
     // Utilities
     compile 'commons-io:commons-io:2.5'
     compile 'com.nbsp:library:1.1'

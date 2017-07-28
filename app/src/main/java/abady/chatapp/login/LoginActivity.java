@@ -39,10 +39,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         ButterKnife.setDebug(true);
         mPresenter = new LoginPresenter();
         mPresenter.setView(this);
-        mPresenter.isUserLoggedIn();
+
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.isUserLoggedIn();
+    }
 
     public void onRegister(View view) {
 
