@@ -36,5 +36,7 @@ public interface LoginContract {
 
         void isUserLoggedIn();
 
+        void destroyView();
+
     }
 }

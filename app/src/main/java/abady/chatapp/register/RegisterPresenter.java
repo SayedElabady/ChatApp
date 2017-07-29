@@ -42,6 +42,11 @@ public class RegisterPresenter extends BaseActivity implements RegisterContract.
     }
 
     @Override
+    public void destroyView() {
+        mView = null;
+    }
+
+    @Override
     public void setView(RegisterContract.View view) {
         mView = view;
     }

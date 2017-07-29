@@ -3,6 +3,7 @@ package abady.chatapp.chat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -38,7 +40,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     EditText input;
     @BindView(R.id.list_of_messages)
     RecyclerView recyclerView;
-
 
     ChatContract.Presenter mPresenter;
 
@@ -110,10 +111,16 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     }
 
     @Override
+    public void onBackPressed() {
+        quitApp();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if(!mPresenter.isUserSignedIn())
             moveToLogInActivity();
+
     }
 
     @Override

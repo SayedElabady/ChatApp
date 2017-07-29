@@ -59,6 +59,11 @@ public class LoginPresenter extends BaseActivity implements LoginContract.Presen
 
     }
 
+    @Override
+    public void destroyView() {
+        mView = null;
+    }
+
 
 }
 

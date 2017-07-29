@@ -43,6 +43,12 @@
             android:text="Register"
             android:onClick="Register"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have Account Already? Login!"
+            android:layout_gravity="center"
+            android:id="@+id/login_button"/>
 
 
     </LinearLayout>

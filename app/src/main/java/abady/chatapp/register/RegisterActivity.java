@@ -20,6 +20,7 @@ import abady.chatapp.login.LoginContract;
 import abady.chatapp.util.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -65,13 +66,21 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        quitApp();
+    }
 
     @Override
     public void setPresenter(RegisterContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.destroyView();
+        super.onDestroy();
+    }
 
     @Override
     public void showProgress() {
@@ -94,13 +103,14 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 .make(relativeLayout, "Successfully Registered!", Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
-
+    @OnClick(R.id.login_button)
+    public void loginIsClicked(){
+        moveToLoginActivity();
+    }
     @Override
     public void showFailureMessage(String message) {
         Toast.makeText(RegisterActivity.this, "Failed Registration: "+message, Toast.LENGTH_SHORT).show();
 
-        //Snackbar snackbar = Snackbar
-          //      .make(relativeLayout, "Failed to Regsiter", Snackbar.LENGTH_SHORT);
-        //snackbar.show();
+
     }
 }

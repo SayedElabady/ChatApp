@@ -71,6 +71,17 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         mPresenter.isUserLoggedIn();
     }
 
+    @Override
+    public void onBackPressed() {
+        quitApp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.destroyView();
+        super.onDestroy();
+    }
+
     public void onRegister(View view) {
 
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);

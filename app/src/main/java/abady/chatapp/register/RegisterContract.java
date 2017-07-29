@@ -27,6 +27,8 @@ public interface RegisterContract {
 
         void updateUserName(String UserName);
 
+        void destroyView();
+
         void setView(View view);
     }
 }
