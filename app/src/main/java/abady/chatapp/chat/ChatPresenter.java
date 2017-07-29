@@ -33,4 +33,11 @@ public class ChatPresenter extends BaseActivity implements ChatContract.Presente
     public String getUserEmail() {
         return getUser().getEmail();
     }
+
+    @Override
+    public boolean isUserSignedIn() {
+        if(isUserLogged())
+            return true;
+        return false;
+    }
 }

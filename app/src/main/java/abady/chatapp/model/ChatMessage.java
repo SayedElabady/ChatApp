@@ -7,6 +7,15 @@ package abady.chatapp.model;
 public class ChatMessage {
     private String MessageText;
 
+    public String getNickName() {
+        return NickName;
+    }
+
+    public void setNickName(String nickName) {
+        NickName = nickName;
+    }
+
+    private String NickName;
 
     public ChatMessage(String messageText, String messageSender) {
         MessageText = messageText;

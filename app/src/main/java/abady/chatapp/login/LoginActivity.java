@@ -9,11 +9,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import abady.chatapp.BaseActivity;
 import abady.chatapp.R;
@@ -21,6 +23,7 @@ import abady.chatapp.chat.ChatActivity;
 import abady.chatapp.register.RegisterActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
 
@@ -30,7 +33,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     @BindView(R.id.activity_login) CoordinatorLayout coordinatorLayout;
 
     LoginContract.Presenter mPresenter;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +58,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         startActivity(intent);
 
     }
-
-    public void login(View view) {
+    @OnClick(R.id.login_button)
+    public void login() {
 
         mPresenter.signInIsClicked(usernameText.getText().toString() , passwordText.getText().toString());
 
@@ -71,7 +74,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void showProgress() {
-        ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
@@ -84,16 +87,21 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     }
     @Override
     public void showSuccessfulMessage() {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Successfully login!", Snackbar.LENGTH_SHORT);
+        Toast.makeText(LoginActivity.this, "Welcome to TaskAPP", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void showFailureMessage(String message) {
+
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Failed to login", Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 
     @Override
-    public void showFailureMessage() {
-        Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "Failed to login", Snackbar.LENGTH_SHORT);
-        snackbar.show();
+    public void hideProgress() {
+        progressDialog.hide();
     }
 
 }

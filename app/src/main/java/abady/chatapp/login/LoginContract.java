@@ -22,8 +22,9 @@ public interface LoginContract {
 
          void showSuccessfulMessage();
 
-         void showFailureMessage();
+         void showFailureMessage(String message);
 
+         void hideProgress();
      }
 
 

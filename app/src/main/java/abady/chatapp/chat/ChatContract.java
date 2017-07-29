@@ -23,5 +23,7 @@ public interface ChatContract {
         void setView(View view);
 
         String getUserEmail();
+
+        boolean isUserSignedIn();
     }
 }
