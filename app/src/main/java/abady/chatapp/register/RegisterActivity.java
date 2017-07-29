@@ -31,7 +31,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
     @BindView(R.id.activity_register) RelativeLayout relativeLayout;
-    @BindView(R.id.nick_name_text) EditText nickName;
     RegisterContract.Presenter mPresenter;
     Utils utils ;
     @Override
@@ -53,9 +52,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         if(Validate() == true){
             String Email = emailRegisterText.getText().toString();
             String Password = passwordRegisterText.getText().toString();
-            String NickName = nickName.getText().toString();
+            // dummy till i update the project and do it.
+            String NickName = "";
             mPresenter.registerIsClicked(Email , Password , NickName);
-         //   mPresenter.updateUserName(UserName);
+
 
         } else {
             Snackbar snackbar = Snackbar

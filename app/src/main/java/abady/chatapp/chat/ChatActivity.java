@@ -51,15 +51,20 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
 
-
         mPresenter = new ChatPresenter();
         mPresenter.setView(this);
 
         arrayList = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        
         adapter = new ListAdapter(this , arrayList , mPresenter.getUserEmail());
         recyclerView.setAdapter(adapter);
+
+        //not the best solution but i tried too much to solve the problem and this works..
+        // i can make it in the presenter and it does this job but i'll have to pass the arraylist and layoutmanager to scroll
+        // actually i don't know what's the best.
         getDatabase().getReference().child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -72,7 +77,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
                     newChatMessage.setMessageSender(name);
                     newChatMessage.setMessageText(message);
                     newChatMessage.setMessageDate(date);
-                 //   newChatMessage.setNickName(getNickName(name));
                     arrayList.add(newChatMessage);
                     adapter.notifyDataSetChanged();
                     linearLayoutManager.scrollToPosition(arrayList.size() - 1);
@@ -101,14 +105,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
             }
         });
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                adapter.notifyDataSetChanged();
-
-            }
-        });
 
     }
 
