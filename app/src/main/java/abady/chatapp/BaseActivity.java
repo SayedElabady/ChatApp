@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import abady.chatapp.data.Firebase;
 import io.reactivex.Maybe;
@@ -31,8 +32,11 @@ public class BaseActivity extends AppCompatActivity{
     }
 
 
-    public Maybe<AuthResult> createUser(String email , String password){
-        return instance.createUser(email , password);
+    public String getNickName(String email){
+        return instance.getNickName(email);
+    }
+    public Maybe<AuthResult> createUser(String email , String password , String UserName){
+        return instance.createUser(email , password , UserName);
     }
 
 
@@ -50,8 +54,8 @@ public class BaseActivity extends AppCompatActivity{
         instance.signOut();
     }
 
-    public void sendMessage(String Message){
-        instance.sendMessage(Message);
+    public void sendMessage(String Message , String currentDateTime){
+        instance.sendMessage(Message, currentDateTime);
     }
 
     public FirebaseDatabase getDatabase(){

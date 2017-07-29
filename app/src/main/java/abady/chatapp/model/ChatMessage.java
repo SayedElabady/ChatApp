@@ -17,10 +17,8 @@ public class ChatMessage {
 
     private String NickName;
 
-    public ChatMessage(String messageText, String messageSender) {
-        MessageText = messageText;
-
-        MessageSender = messageSender;
+    public ChatMessage(String NickName) {
+        this.NickName = NickName;
     }
     public ChatMessage(){
 

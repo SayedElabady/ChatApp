@@ -16,7 +16,7 @@ public interface ChatContract {
 
     interface Presenter{
 
-        void sendIsClicked(String Message);
+        void sendIsClicked(String Message , String currentDateTime);
 
         void signOutAcc();
 

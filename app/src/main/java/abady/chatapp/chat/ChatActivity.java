@@ -2,7 +2,6 @@ package abady.chatapp.chat;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,18 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-import org.apache.commons.io.output.StringBuilderWriter;
-
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import abady.chatapp.BaseActivity;
@@ -45,7 +41,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
 
     ChatContract.Presenter mPresenter;
-    private FirebaseListAdapter<ChatMessage> listAdapter;
+
     private ListAdapter adapter;
     private ArrayList<ChatMessage> arrayList;
     private LinearLayoutManager linearLayoutManager;
@@ -55,8 +51,10 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
 
+
         mPresenter = new ChatPresenter();
         mPresenter.setView(this);
+
         arrayList = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -70,8 +68,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
                     ChatMessage newChatMessage = new ChatMessage();
                     String name = (String) newMessage.get("messageSender");
                     String message = (String) newMessage.get("messageText");
+                    String date = (String) newMessage.get("messageDate");
                     newChatMessage.setMessageSender(name);
                     newChatMessage.setMessageText(message);
+                    newChatMessage.setMessageDate(date);
+                 //   newChatMessage.setNickName(getNickName(name));
                     arrayList.add(newChatMessage);
                     adapter.notifyDataSetChanged();
                     linearLayoutManager.scrollToPosition(arrayList.size() - 1);
@@ -120,7 +121,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
         return true;
     }
 
@@ -130,6 +131,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
            mPresenter.signOutAcc();
 
         }
+
 
         return true;
     }
@@ -142,7 +144,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @OnClick(R.id.sendButton)
     public void sendClicked(){
         String Message = input.getText().toString();
-        mPresenter.sendIsClicked(Message);
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        mPresenter.sendIsClicked(Message , currentDateTimeString);
 
         input.setText("");
 
@@ -166,11 +169,11 @@ class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     ArrayList<ChatMessage> chat;
     Utils utils;
-    String name;
-    public ListAdapter(Context context , ArrayList<ChatMessage> chat , String name){
+    String email;
+    public ListAdapter(Context context , ArrayList<ChatMessage> chat , String email){
         this.context = context;
         this.chat = chat;
-        this.name = name;
+        this.email = email;
         utils = new Utils();
     }
     @Override
@@ -191,17 +194,19 @@ class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
        if(holder instanceof ChatHolder){
            String name = chat.get(position).getMessageSender();
            String message = chat.get(position).getMessageText();
-           name = utils.formatString(name);
+           String time = chat.get(position).getMessageDate();
+          name = utils.formatString(name);
            if(getItemViewType(position) == 0)
                 ((ChatHolder) holder).setName("Me");
            else
            ((ChatHolder) holder).setName(name);
            ((ChatHolder) holder).setMessage(message);
+           ((ChatHolder) holder).setCurrentTime(time);
        }
     }
     @Override
     public int getItemViewType(int position) {
-        if(chat.get(position).getMessageSender().equals( name)) return 0;
+        if(chat.get(position).getMessageSender().equals( email)) return 0;
         else return  1;
 
     }

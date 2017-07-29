@@ -8,18 +8,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     >
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/user_name"
-        android:text="ssasas"
-        android:textColor="#FFFFFF"
-        />
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name"
+
+            android:text="ssasas"
+            android:textColor="#FFFFFF"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:gravity="right"
+            android:paddingRight="@dimen/activity_vertical_margin"
+            android:text="ssasas"
+            android:textColor="#FFFFFF"
+            />
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/message_text"
         android:text="sssssssssss"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"/>
 </LinearLayout>

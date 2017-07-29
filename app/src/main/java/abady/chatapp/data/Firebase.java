@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import abady.chatapp.model.ChatMessage;
+import abady.chatapp.util.Utils;
 import durdinapps.rxfirebase2.RxFirebaseAuth;
 import durdinapps.rxfirebase2.RxFirebaseDatabase;
 import durdinapps.rxfirebase2.RxFirebaseUser;
@@ -30,6 +31,7 @@ import static android.content.ContentValues.TAG;
 public class Firebase {
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
+    Utils utils;
 
     private static Firebase instance;
     public synchronized static Firebase getInstance(){
@@ -41,15 +43,31 @@ public class Firebase {
     private Firebase() {
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        utils = new Utils();
     }
 
     public Maybe<AuthResult> signIn(String email, String password){
         return RxFirebaseAuth.signInWithEmailAndPassword(mAuth , email , password);
     }
 
-    public Maybe<AuthResult> createUser(String email , String password){
+    public Maybe<AuthResult> createUser(String email , String password , String NickName){
+
+//        firebaseDatabase.getReference()
+//                .child("nicknames")
+//                .child(utils.replace(email))
+//                .push()
+//                .setValue(new ChatMessage(NickName));
         return RxFirebaseAuth.createUserWithEmailAndPassword(mAuth , email, password);
 
+    }
+
+    public String getNickName(String email){
+         Object chatMessage = firebaseDatabase.getReference()
+                .child("nicknames")
+                .child(utils.replace(email));
+                ChatMessage chatMessage1 = (ChatMessage) chatMessage;
+        return chatMessage1.getNickName();
+                //.toString();
     }
     public boolean isUserLogged(){
         FirebaseUser user = mAuth.getCurrentUser();
@@ -64,10 +82,12 @@ public class Firebase {
         mAuth.signOut();
     }
 
-    public void sendMessage(String message){
+    public void sendMessage(String message , String currentDateTime){
+        String Email = mAuth.getCurrentUser().getEmail();
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setMessageText(message);
-        String Email = mAuth.getCurrentUser().getEmail();
+       chatMessage.setMessageDate(currentDateTime);
+
         chatMessage.setMessageSender(Email);
        // String NickName = firebaseDatabase.getReference().child("nicknames").child(Email).toString();
        // chatMessage.setNickName(NickName);
@@ -85,8 +105,7 @@ public class Firebase {
 
 
    public void updateUserInfo(String UserName) {
-      // RxFirebaseUser.updateProfile(mAuth.getCurrentUser(), new UserProfileChangeRequest.Builder()
-              // .setDisplayName(UserName).build());
+
        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                .setDisplayName(UserName)
@@ -101,11 +120,7 @@ public class Firebase {
                        }
                    }
                });
-   /* String UID = mAuth.getCurrentUser().getUid();
-       DatabaseReference users = firebaseDatabase.getReference("users").child(UID);
-       ChatMessage chatMessage = new ChatMessage(Email ,  UserName);
-       RxFirebaseDatabase.setValue(users , chatMessage);
-*/
+
    }
 
    public FirebaseUser getUser(){

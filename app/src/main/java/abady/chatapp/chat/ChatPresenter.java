@@ -12,8 +12,8 @@ public class ChatPresenter extends BaseActivity implements ChatContract.Presente
         ChatContract.View mView ;
 
     @Override
-    public void sendIsClicked(String Message) {
-        sendMessage(Message);
+    public void sendIsClicked(String Message , String currentDateTime) {
+        sendMessage(Message , currentDateTime);
 
         mView.updateUI();
     }

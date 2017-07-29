@@ -13,12 +13,13 @@ import abady.chatapp.R;
  */
 
 public class ChatHolder extends RecyclerView.ViewHolder{
-    private final TextView messageSender , messageText;
+    private final TextView messageSender , messageText , currentTime;
 
     public ChatHolder(View itemView) {
         super(itemView);
        messageSender = (TextView) itemView.findViewById(R.id.user_name);
         messageText = (TextView) itemView.findViewById(R.id.message_text);
+        currentTime = (TextView) itemView.findViewById(R.id.time);
     }
 
 
@@ -29,8 +30,7 @@ public class ChatHolder extends RecyclerView.ViewHolder{
         messageText.setText(message);
     }
 
-
-
-
-
+    public void setCurrentTime(String currenttime) {
+        currentTime.setText(currenttime);
+    }
 }

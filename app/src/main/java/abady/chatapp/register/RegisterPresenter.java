@@ -15,10 +15,10 @@ public class RegisterPresenter extends BaseActivity implements RegisterContract.
     RegisterContract.View mView ;
 
     @Override
-    public void registerIsClicked(String Email, String Password ) {
+    public void registerIsClicked(String Email, String Password, String NickName ) {
         mView.showProgress();
 
-        createUser(Email , Password)
+        createUser(Email , Password , NickName)
 
                 .subscribe(authResult -> {
                            mView.showSuccessfulMessage();

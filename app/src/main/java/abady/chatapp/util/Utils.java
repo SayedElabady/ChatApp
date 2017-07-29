@@ -16,4 +16,7 @@ public class Utils {
 
         return ret;
     }
+    public String replace(String x){
+        return x.replace('.' , '*');
+    }
 }

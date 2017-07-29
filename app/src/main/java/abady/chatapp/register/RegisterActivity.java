@@ -17,6 +17,7 @@ import abady.chatapp.R;
 import abady.chatapp.chat.ChatActivity;
 import abady.chatapp.login.LoginActivity;
 import abady.chatapp.login.LoginContract;
+import abady.chatapp.util.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
@@ -30,8 +31,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @BindView(R.id.password_register_text) EditText passwordRegisterText;
     @BindView(R.id.repeated_password_text) EditText repeatedPasswordText;
     @BindView(R.id.activity_register) RelativeLayout relativeLayout;
-
+    @BindView(R.id.nick_name_text) EditText nickName;
     RegisterContract.Presenter mPresenter;
+    Utils utils ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         ButterKnife.bind(this);
         mPresenter = new RegisterPresenter();
         mPresenter.setView(this);
+        utils = new Utils();
     }
 
 
@@ -46,12 +49,12 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     boolean Validate(){
         return (passwordRegisterText.getText().toString().equals( repeatedPasswordText.getText().toString()));
     }
-
     public void Register(View view) {
         if(Validate() == true){
             String Email = emailRegisterText.getText().toString();
             String Password = passwordRegisterText.getText().toString();
-            mPresenter.registerIsClicked(Email , Password );
+            String NickName = nickName.getText().toString();
+            mPresenter.registerIsClicked(Email , Password , NickName);
          //   mPresenter.updateUserName(UserName);
 
         } else {
